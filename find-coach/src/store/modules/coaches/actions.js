@@ -9,8 +9,9 @@ export default {
             areas: data.areas,
         };
 
+        const token = context.rootGetters.token;
         const baseUrl = 'https://vue-http-demo-ed1bf-default-rtdb.firebaseio.com';
-        const dataUrl = `${baseUrl}/coaches/${userId}.json/`;
+        const dataUrl = `${baseUrl}/coaches/${userId}.json?auth=${token}`;
         await fetch(dataUrl, {
             method: 'PUT',
             body: JSON.stringify(coachData),
@@ -26,8 +27,9 @@ export default {
             return;
         }
 
+        const token = context.rootGetters.token;
         const baseUrl = 'https://vue-http-demo-ed1bf-default-rtdb.firebaseio.com/';
-        const dataUrl = `${baseUrl}/coaches.json`;
+        const dataUrl = `${baseUrl}/coaches.json?auth=${token}`;
 
         const response = await fetch(dataUrl);
         const responseData = await response.json();

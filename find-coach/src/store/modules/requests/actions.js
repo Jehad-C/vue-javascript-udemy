@@ -6,8 +6,9 @@ export default {
             message: payload.message,
         };
 
+        const token = context.rootGetters.token;
         const baseUrl = 'https://vue-http-demo-ed1bf-default-rtdb.firebaseio.com';
-        const dataUrl = `${baseUrl}/requests/${payload.coachId}.json/`;
+        const dataUrl = `${baseUrl}/requests/${payload.coachId}.json?auth=${token}`;
         const response = await fetch(dataUrl, {
             method: 'POST',
             body: JSON.stringify(newRequest),
@@ -25,8 +26,10 @@ export default {
     },
     async fetchRequests(context) {
         const coachId = context.rootGetters.userId;
+        const token = context.rootGetters.token;
         const baseUrl = 'https://vue-http-demo-ed1bf-default-rtdb.firebaseio.com';
-        const dataUrl = `${baseUrl}/requests/${coachId}.json/`;
+        const dataUrl = `${baseUrl}/requests/${coachId}.json?auth=${token}`;
+
         const response = await fetch(dataUrl);
         const responseData = await response.json();
 
